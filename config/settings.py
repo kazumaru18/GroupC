@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 各々のアプリ↓
-
+    'sato.apps.SatoConfig',
 
     'accounts.apps.AccountsConfig',
 
     'django.contrib.sites',
     'allauth',
-    'allauth.accounts',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
