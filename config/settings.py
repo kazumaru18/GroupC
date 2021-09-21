@@ -129,3 +129,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+# 佐藤が追加
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
