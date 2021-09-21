@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 各々のアプリ↓
-
+    'watanabe.apps.WatanabeConfig',
 
     'accounts.apps.AccountsConfig',
 
     'django.contrib.sites',
     'allauth',
-    'allauth.accounts',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
