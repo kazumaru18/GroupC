@@ -1,0 +1,51 @@
+{% extends 'blog/base.html'%}
+{% load static %}
+
+{% block title %}お問い合わせ|Private Blog{% endblock %}
+{% block active_contact %}active{% endblock%}
+
+{% block header %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({% static 'assets/img/contact-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>お問い合わせ</h1>
+                    <span class="subheading">お問い合わせ事項がありましたら、こちらでメッセージを送ってください</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block contents %}
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>ご連絡がある方は、必要事項を下記に入力してメッセージを送信してください。可能な限り早めに返します！</p>
+                <div class="my-5">
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        {% for field in form %}
+                        <div class="form-floating">
+                            <label for="{{ field.id_for_label }}">
+                                <strong>{{ field.label_tag }}</strong>
+                            </label>
+                                {{ field }}
+                                {{ field.errors }}
+                        </div>
+                        {% endfor %}
+                        <br />
+                        <button class="btn btn-primary text-uppercase disabled" id="submitButton" type="submit">送信</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
