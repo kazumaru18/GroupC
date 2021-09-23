@@ -19,4 +19,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('kazumaru/', include('kazumaru.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
+
+from django.contrib.staticfiles.urls import static
+from . import settings
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
