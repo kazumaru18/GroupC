@@ -1,24 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Kazumaru Blog{% endblock %}
+{% block title %}ブログ編集 | Kazumaru Blog{% endblock %}
 
 {% block header %}
-        <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
-                        </div>
-                    </div>
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Contact Me</h1>
+                    <span class="subheading">Have questions? I have answers.</span>
                 </div>
             </div>
-        </header>
+        </div>
+    </div>
+</header>
 {% endblock %}
 
 {% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                <button class="btn btn-primary" type="submit">更新</button>
+                <a class="btn btn-secondary ml-2" href="{% url 'kazumaru:blog_detail' object.pk %}">キャンセル</a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
         
