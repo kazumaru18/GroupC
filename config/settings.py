@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # 各々のアプリ↓
 
-
+    'sakata.apps.SakataConfig'
     'accounts.apps.AccountsConfig',
 
     'django.contrib.sites',
