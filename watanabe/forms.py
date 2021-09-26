@@ -12,7 +12,7 @@ class ContactForm(forms.Form):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
 
-        self.fields['name'].widget.attrs['class'] = 'form-control col-9'
+        self.fields['name'].widget.attrs['class'] = 'form-control col-11'
         # self.fields['name'].widget.attrs['placeholder'] = 'お名前をここに入力してください。'
         self.fields['email'].widget.attrs['class'] = 'form-control col-11'
         # self.fields['email'].widget.attrs['placeholder'] = 'メールアドレスをここに入力してください。'
