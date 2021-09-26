@@ -35,8 +35,13 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">Sample Post</a></li>
                         <li class="nav-item {%block active_contact %}{% endblock %}" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'watanabe:contact' %}">Form</a></li>
+                        {%if user.is_authenticated%}
+                        <li class="nav-item {%block active_blog_list%}{%endblock%}" ><a class="nav-link px-lg-3 py-3 py-lg-4" href="{%url 'watanabe:blog_list' %}">Blog List</a></li>
+                        <li class="nav-item{%block active_logout%}{%endblock%}"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{%url 'account_logout' %}">Log Out</a></li>
+                        {%else%}
                         <li class="nav-item {%block active_signup %}{% endblock %}"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'account_signup' %}">Sign Up</a></li>
                         <li class="nav-item {%block account_login %}{% endblock %}"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'account_login' %}">Log In</a></li>
+                        {%endif%}
                     </ul>
                 </div>
             </div>
