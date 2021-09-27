@@ -15,20 +15,11 @@
                     <h2 class="post-title">{{ kazumaru.title }}</h2>
                     <h3 class="post-subtitle">{{ kazumaru.content|truncatechars:20 }}</h3>
                 </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on September 24, 2021
-                </p>
             </div>
             <hr>
             {% empty %}
                 <p>日記がありません。</p>
             {% endfor %}
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
         </div>
     </div>
 </div>
