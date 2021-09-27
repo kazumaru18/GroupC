@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table class="table">
+                    {{ form.as_table }}
+                </table>
+                <button class="btn btn-primary" type="submit">更新</button>
+                <a href="{% url 'sato:blog_detail' object.pk %}" class="btn btn-primary">キャンセル</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

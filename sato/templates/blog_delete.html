@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style w-100">
+            <form method="post">
+                {% csrf_token %}
+                <p>本当に削除しますか？</p>
+                <button class="btn btn-primary mt-5" type="submit">削除</button>
+                <a href="{% url 'sato:blog_detail' object.pk %}" class="btn btn-secondary mt-5 ml-2">キャンセル</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
