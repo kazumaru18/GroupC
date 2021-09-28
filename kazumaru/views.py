@@ -29,23 +29,22 @@ class ContactView(generic.FormView):
         return super().form_valid(form)
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Kazumaru
+from .models import Blog
 class KazumaruListView(LoginRequiredMixin, generic.ListView):
-    model = Kazumaru
+    model = Blog
     template_name = 'blog_list.html'
-    paginate_by = 2
 
     def get_queryset(self):
-        diaries = Kazumaru.objects.filter(user=self.request.user).order_by('-created_at')
+        diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
         return diaries
 
 class KazumaruDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Kazumaru
+    model = Blog
     template_name = 'blog_detail.html'
 
 from .forms import ContactForm, KazumaruCreateForm
 class KazumaruCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Kazumaru
+    model = Blog
     template_name = 'blog_create.html'
     form_class = KazumaruCreateForm
     success_url = reverse_lazy('kazumaru:blog_list')
@@ -62,7 +61,7 @@ class KazumaruCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_invalid(form)
         
 class KazumaruUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Kazumaru
+    model = Blog
     template_name = 'blog_update.html'
     form_class = KazumaruCreateForm
 
@@ -78,7 +77,7 @@ class KazumaruUpdateView(LoginRequiredMixin, generic.UpdateView):
         return super().form_invalid(form)
 
 class KazumaruDeleteView(LoginRequiredMixin, generic.DeleteView):
-    model = Kazumaru
+    model = Blog
     template_name = 'blog_delete.html'
     success_url = reverse_lazy('kazumaru:blog_list')
 

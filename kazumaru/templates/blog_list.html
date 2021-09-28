@@ -30,19 +30,14 @@
             </div>
             {% for kazumaru in blog_list %}
             <div class="post-preview">
-                <a href="{% url 'kazumaru:blog_detail' kazumaru.pk %}">
+                <a href="{% url 'kazumaru:blog_detail' blog.pk %}">
                     <h2 class="post-title">{{ kazumaru.title }}</h2>
                     <h3 class="post-subtitle">{{ kazumaru.content|truncatechars:20 }}</h3>
                 </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on September 24, 2021
-                </p>
             </div>
             <hr>
             {% empty %}
-                <p>日記がありません。</p>
+                <p>ブログがありません。</p>
             {% endfor %}
         </div>
     </div>

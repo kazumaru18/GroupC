@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Kazumaru
+from .models import Blog
 
 # Register your models here.
-admin.site.register(Kazumaru)
+admin.site.register(Blog)
