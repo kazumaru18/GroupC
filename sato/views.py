@@ -4,8 +4,11 @@ from django.views import generic
 # from .forms import ContactForm
 # Create your views here.
 
-class IndexView(generic.TemplateView):
+from .models import Blog
+class IndexView(generic.ListView):
+    model = Blog
     template_name = 'index.html'
+    paginate_by = 3
 
 class AboutView(generic.TemplateView):
     template_name = 'about.html'
