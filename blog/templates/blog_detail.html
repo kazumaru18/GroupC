@@ -1,0 +1,27 @@
+{% extends 'blog/base.html'%}
+{% load static %}
+{% block title %}詳細ページ|Private Blog{% endblock %}
+{% block header %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({% static 'assets/img/home-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>日記詳細</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+{% block contents %}
+<h1>{{ object.title }}</h1>
+<p>{{ object.published_at|date }}</p>
+<img src="/media/post_content_images/nc72734.png" width="300" height="300" alt="Pipenv | Python">
+{% for tag in object.tags.all %}
+{{ tag.name }}
+{% endfor %}
+<hr>
+{{ object.content|safe }}
+{% endblock %}

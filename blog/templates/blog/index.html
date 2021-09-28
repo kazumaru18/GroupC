@@ -8,8 +8,8 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Private Blog</h1>
-                    <span class="subheading">A Blog Theme by Bootstrap</span>
+                    <h1>Public Blog</h1>
+                    <span class="subheading">個人で閲覧可能のブログサイト</span>
                 </div>
             </div>
         </div>
@@ -22,58 +22,49 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Post preview-->
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                    <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on September 24, 2021
-                </p>
-            </div>
+            <h3>one</h3>
             <!-- Divider-->
             <hr class="my-4" />
             <!-- Post preview-->
-            <div class="post-preview">
-                <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on September 18, 2021
-                </p>
-            </div>
+            <h3>two</h3>
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Post preview-->
+            <h3>three</h3>
             <!-- Divider-->
             <hr class="my-4" />
             <!-- Post preview-->
             <div class="post-preview">
                 <a href="post.html">
-                    <h2 class="post-title">Science has not yet mastered prophecy</h2>
-                    <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
+                    <h2 class="post-title">Sample</h2>
+                    <h3 class="post-subtitle">Sample-sub</h3>
                 </a>
                 <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on August 24, 2021
+                    Posted by Start Bootstrap on July 8, 2021
                 </p>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">Failure is not an option</h2>
-                    <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#!">Start Bootstrap</a>
-                    on July 8, 2021
-                </p>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
+            <h1>投稿一覧</h1>
+            <ul>
+            {% for blog in object_list %}
+            {% if user.is_authenticated or blog.is_public %}
+                <li>
+                    {% if not blog.is_public %}[下書き] 
+                    {% endif %}
+                    <a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a>
+                    <br>
+                    {% if blog.img %}
+                    <a href="{% url 'blog:blog_detail' blog.id%}">
+                        <img src="{{ blog.img.url }}" alt="{{ blog.title }}">
+                    </a>
+                    {% endif %}
+                </li>
+            {% endif %}
+            {% empty %}
+            <li>まだ投稿はありません。</li>
+            {% endfor %}
+            </ul>
             <!-- Pager-->
             <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
         </div>
