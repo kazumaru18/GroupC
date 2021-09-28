@@ -77,8 +77,10 @@
             <div class="col-9">
                 {{object.updated_at}}
             </div>
+            {%if user.is_authenticated%}
             <a class="btn btn-success mt-5 mb-3" href="{%url 'watanabe:blog_update' object.pk%}">編集</a>
             <a class="btn btn-danger mt-5 ml-2 mb-3" href="{%url 'watanabe:blog_delete' object.pk%}">削除</a>
+            {%endif%}
         </div>
     </div>
 </div>

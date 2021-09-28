@@ -26,15 +26,15 @@ class ContactView(generic.FormView):
         logger.info('Inquiry send by {}'.format(form.cleaned_data['name']))
         return super().form_valid(form)
 
-class BlogListView(LoginRequiredMixin, generic.ListView):
+class BlogListView(generic.ListView):
     model = Blog
     template_name = 'blog_list.html'
 
-    def get_queryset(self):
-        diaries = Blog.objects.filter(user = self.request.user).order_by('-created_at')
-        return diaries
+    # def get_queryset(self):
+    #     diaries = Blog.objects.filter(user = self.request.user).order_by('-created_at')
+    #     return diaries
 
-class BlogDetailView(LoginRequiredMixin, generic.DetailView):
+class BlogDetailView(generic.DetailView):
     model = Blog
     template_name = "blog_detail.html"
 

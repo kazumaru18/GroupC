@@ -29,10 +29,14 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="my-5">
-
-            <div class="clearfix">
+             
+            <div class="clearfix"> 
+              {%if user.is_authenticated%}
                 <a class="btn btn-primary float-right" href="{%url 'watanabe:blog_create'%}">新規作成</a>
+              {%endif%}
             </div>
+           
+
             {%for blog in blog_list%}
             <div class="post-preview">
               <a href="{%url 'watanabe:blog_detail' blog.pk %}">
