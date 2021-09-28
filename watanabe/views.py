@@ -38,14 +38,14 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = Blog
     template_name = "blog_detail.html"
 
-class BlogDeleteView(LoginRequiredMixin, generic.DetailView):
+class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Blog
     template_name = "blog_delete.html"
     success_url = reverse_lazy('watanabe:blog_list')
 
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'ブログを削除しました。')
-        return super().delete(request,*args, **kwargs)
+        return super().delete(request, *args, **kwargs)
 
 class BlogCreateView(LoginRequiredMixin,generic.CreateView):
     model = Blog
@@ -79,3 +79,5 @@ class BlogUpdateView(LoginRequiredMixin,generic.UpdateView):
     def form_invalid(self, form):
         messages.error(self.request,"ブログの更新に失敗しました。")
         return super().form_invalid(form)
+
+        
