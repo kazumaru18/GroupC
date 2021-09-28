@@ -18,4 +18,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sakata/', include('sakata.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
+
+from django.contrib.staticfiles.urls import static
+from . import settings
+# 開発サーバーでメディアを配信できるようにする設定
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

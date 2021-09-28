@@ -36,7 +36,7 @@ class ContactForm(forms.Form):
 
 class SakataCreateForm(forms.ModelForm):
     class Meta:
-        model = Diary
+        model = Sakata
         fields = ('title', 'content', 'photo1', 'photo2', 'photo3',)
 
         def __init__(self, *args, **kwargs):

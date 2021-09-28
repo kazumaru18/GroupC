@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import CustomUser
 
 # Create your models here.
 
@@ -14,7 +15,7 @@ class Sakata(models.Model):
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
 
     class Meta:
-        verbose_name_plural = 'Diary'
+        verbose_name_plural = 'Sakata'
 
     def __str__(self):
         return self.title

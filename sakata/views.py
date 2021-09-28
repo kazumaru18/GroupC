@@ -40,12 +40,12 @@ class SakataListView(LoginRequiredMixin, generic.ListView):
         diaries = Sakata.objects.filter(user=self.request.user).order_by('-created_at')
         return diaries
 
-class DiaryDetailView(LoginRequiredMixin, generic.DetailView):
+class SakataDetailView(LoginRequiredMixin, generic.DetailView):
     model = Sakata
-    template_name = 'diary_detail.html'
+    template_name = 'sakata_detail.html'
     pk_url_kwarg = 'id'
 
-class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
+class SakataCreateView(LoginRequiredMixin, generic.CreateView):
     model = Sakata
     template_name = 'sakata_create.html'
     form_class = SakataCreateForm
@@ -55,11 +55,11 @@ class DiaryCreateView(LoginRequiredMixin, generic.CreateView):
         diary = form.save(commit=False)
         diary.user = self.request.user
         diary.save()
-        messages.success(self.request, '日記を作成しました。')
+        messages.success(self.request, 'ブログを作成しました。')
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, "日記の作成に失敗しました。")
+        messages.error(self.request, "ブログの作成に失敗しました。")
         return super().form_invalid(form)
 
 class SakataUpdateView(LoginRequiredMixin, generic.UpdateView):
@@ -71,18 +71,18 @@ class SakataUpdateView(LoginRequiredMixin, generic.UpdateView):
         return reverse_lazy('sakata:blog_detail', kwargs={'pk': self.kwargs['pk']})
 
     def form_valid(self, form):
-        messages.success(self.request, '日記を更新しました。')
+        messages.success(self.request, 'ブログを更新しました。')
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, "日記の更新に失敗しました。")
+        messages.error(self.request, "ブログの更新に失敗しました。")
         return super().form_invalid(form)
 
-class DiaryDeleteView(LoginRequiredMixin, generic.DeleteView):
+class SakataDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Sakata
     template_name = 'sakata_delete.html'
     success_url = reverse_lazy('sakata:blog_list')
 
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, "日記を削除しました。")
+        messages.success(self.request, "ブログを削除しました。")
         return super().delete(request, *args, **kwargs)
