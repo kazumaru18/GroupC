@@ -26,7 +26,7 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <p class="w-100">{{ object.content|linebreaksbr }}</p>
+                <p class="text-break">{{ object.content|linebreaksbr }}</p>
                 <hr>
 
                 <div class="row">
@@ -61,8 +61,10 @@
                         {{ object.updated_at }}
                     </div>
                 </div>
+                {% if user.is_authenticated %}
                 <a href="{% url 'sato:blog_update' object.pk %}" class="btn btn-success mt-5 mb-3">編集</a>
                 <a href="{% url 'sato:blog_delete' object.pk %}" class="btn btn-danger mt-5 ml-2 mb-3">削除</a>
+                {% endif %}
             </div>
         </div>
     </div>
