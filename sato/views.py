@@ -33,16 +33,16 @@ class InquiryView(generic.FormView):
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog
-class BlogListView(LoginRequiredMixin, generic.ListView):
+class BlogListView(generic.ListView):
     model = Blog
     template_name = 'blog_list.html'
-    paginate_by = 2
+    paginate_by = 5
 
-    def get_queryset(self):
-        diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
-        return diaries
+    # def get_queryset(self):
+    #     diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
+    #     return diaries
 
-class BlogDetailView(LoginRequiredMixin, generic.DetailView):
+class BlogDetailView(generic.DetailView):
     model = Blog
     template_name = 'blog_detail.html'
 

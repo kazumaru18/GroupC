@@ -33,6 +33,8 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:about' %}">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:post' %}">Sample Post</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:inquiry' %}">Inquiry</a></li>
+                
+                        <li class="nav-item {% block active_blog_list %}{% endblock %}"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:blog_list' %}">BLOG LIST</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'account_logout' %}">Log Out</a></li>
                         {% else %}
