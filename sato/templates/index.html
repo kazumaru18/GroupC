@@ -1,47 +1,47 @@
 {% extends 'base.html' %}
 {% load static %}
-    {% block header %}
-    <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
-        <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="site-heading">
-                        <h1>Clean Blog</h1>
-                        <span class="subheading">A Blog Theme by Start Bootstrap</span>
-                    </div>
+{% block header %}
+<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <span class="subheading">A Blog Theme by Start Bootstrap</span>
                 </div>
             </div>
         </div>
-    </header>
-    {% endblock %}
-        {% block contents %}
+    </div>
+</header>
+{% endblock %}
+{% block contents %}
         
-        <section id="scroll">
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="my-div-style w-100">
-                        <div class="col-lg-8 col-md-10 mx-auto">
-                            <div class="clearfix">
-                                <a class="btn btn-primary float-right" href="{% url 'sato:blog_create' %}">新規作成</a>
-                            </div>
-                            {% for blog in blog_list %}
-                                <div class="post-preview">
-                                    <a href="{% url 'sato:blog_detail' blog.pk %}">
-                                        <h2 class="post-title">{{ blog.title }}</h2>
-                                        <h3 class="post-subtitle">{{ blog.content|truncatechars:20 }}</h3>
-                                    </a>
-                                    <p class="post-meta">{{ blog.created_at }} 作成者{{ blog.user }}</p>
-                                </div>
-                                <hr>
-                            {% empty %}
-                                <p>日記がありません。</p>
-                            {% endfor %}
-    
+    <section id="scroll">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="my-div-style w-100">
+                    <div class="col-lg-8 col-md-10 mx-auto">
+                        <div class="clearfix">
+                            <a class="btn btn-primary float-right" href="{% url 'sato:blog_list' %}">一覧表示</a>
                         </div>
+                        {% for blog in blog_list %}
+                            <div class="post-preview">
+                                <a href="{% url 'sato:blog_detail' blog.pk %}">
+                                    <h2 class="post-title">{{ blog.title }}</h2>
+                                    <h3 class="post-subtitle">{{ blog.content|truncatechars:20 }}</h3>
+                                </a>
+                                <p class="post-meta">{{ blog.created_at }} 作成者{{ blog.user }}</p>
+                            </div>
+                            <hr>
+                        {% empty %}
+                            <p>日記がありません。</p>
+                        {% endfor %}
+    
                     </div>
                 </div>
-            </div>            
-        </section>
-        {% endblock %}
+            </div>
+        </div>            
+    </section>
+{% endblock %}
 
         
