@@ -1,4 +1,3 @@
-from django.shortcuts import render
 import logging
 from django.contrib import messages
 from django.views import generic
@@ -14,9 +13,6 @@ class IndexView(generic.TemplateView):
 class AboutView(generic.TemplateView):
     template_name="about.html"
 
-def post(request):
-    return render(request, 'post.html')
-
 class ContactView(generic.FormView):
     template_name = "contact.html"
     form_class = ContactForm
@@ -30,29 +26,30 @@ class ContactView(generic.FormView):
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog
-class KazumaruListView(LoginRequiredMixin, generic.ListView):
+class BlogListView(LoginRequiredMixin, generic.ListView):
     model = Blog
     template_name = 'blog_list.html'
+    paginate_by = 4
 
-    def get_queryset(self):
-        diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
-        return diaries
+    # def get_queryset(self):
+    #     diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
+    #     return diaries
 
-class KazumaruDetailView(LoginRequiredMixin, generic.DetailView):
+class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = Blog
     template_name = 'blog_detail.html'
 
-from .forms import ContactForm, KazumaruCreateForm
-class KazumaruCreateView(LoginRequiredMixin, generic.CreateView):
+from .forms import ContactForm, BlogCreateForm
+class BlogCreateView(LoginRequiredMixin, generic.CreateView):
     model = Blog
     template_name = 'blog_create.html'
-    form_class = KazumaruCreateForm
+    form_class = BlogCreateForm
     success_url = reverse_lazy('kazumaru:blog_list')
 
     def form_valid(self, form):
-        kazumaru = form.save(commit=False)
-        kazumaru.user = self.request.user
-        kazumaru.save()
+        blog = form.save(commit=False)
+        blog.user = self.request.user
+        blog.save()
         messages.success(self.request, 'ブログを作成しました。')
         return super().form_valid(form)
 
@@ -60,10 +57,10 @@ class KazumaruCreateView(LoginRequiredMixin, generic.CreateView):
         messages.error(self.request, 'ブログの作成に失敗しました。')
         return super().form_invalid(form)
         
-class KazumaruUpdateView(LoginRequiredMixin, generic.UpdateView):
+class BlogUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Blog
     template_name = 'blog_update.html'
-    form_class = KazumaruCreateForm
+    form_class = BlogCreateForm
 
     def get_success_url(self):
         return reverse_lazy('kazumaru:blog_detail', kwargs={'pk':self.kwargs['pk']})
@@ -76,7 +73,7 @@ class KazumaruUpdateView(LoginRequiredMixin, generic.UpdateView):
         messages.error(self.request, 'ブログの更新に失敗しました。')
         return super().form_invalid(form)
 
-class KazumaruDeleteView(LoginRequiredMixin, generic.DeleteView):
+class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Blog
     template_name = 'blog_delete.html'
     success_url = reverse_lazy('kazumaru:blog_list')

@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.fields import NullBooleanField
 from accounts.models import CustomUser, models
 
 # Create your models here.
@@ -14,7 +13,7 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(verbose_name='更新日時', auto_now=True)
 
     class Meta:
-        verbose_name_plural = 'Kazumaru'
+        verbose_name_plural = 'Blog'
 
     def __str__(self):
         return self.title

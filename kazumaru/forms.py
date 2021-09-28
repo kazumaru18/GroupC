@@ -1,7 +1,5 @@
 from django import forms
-from django.contrib import messages
 from django.core.mail import EmailMessage
-from django.db.models import fields
 from .models import Blog
 
 class ContactForm(forms.Form):
@@ -40,7 +38,7 @@ class ContactForm(forms.Form):
         message = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list)
         message.send()
 
-class KazumaruCreateForm(forms.ModelForm):
+class BlogCreateForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('title', 'content', 'photo1', 'photo2', 'photo3',)

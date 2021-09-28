@@ -10,8 +10,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
-                    <h1>Contact Me</h1>
-                    <span class="subheading">Have questions? I have answers.</span>
+                    <h1>Blog List</h1>
                 </div>
             </div>
         </div>
@@ -28,17 +27,47 @@
             <div class="clearfix">
                 <a class="btn btn-primary float-right" href="{% url 'kazumaru:blog_create' %}">新規作成</a>
             </div>
-            {% for kazumaru in blog_list %}
+            {% for blog in blog_list %}
             <div class="post-preview">
                 <a href="{% url 'kazumaru:blog_detail' blog.pk %}">
-                    <h2 class="post-title">{{ kazumaru.title }}</h2>
-                    <h3 class="post-subtitle">{{ kazumaru.content|truncatechars:20 }}</h3>
+                    <h2 class="post-title">{{ blog.title }}</h2>
+                    <h3 class="post-subtitle">{{ blog.content|truncatechars:20 }}</h3>
                 </a>
             </div>
             <hr>
             {% empty %}
                 <p>ブログがありません。</p>
             {% endfor %}
+
+            {% if is_paginated %}
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for page_num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page_num %}
+                            <li class="page-item active">
+                                <a href="#" class="page-link">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a href="?page={{ page_obj.next_page_number }}" class="page-link">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 </div>
