@@ -46,7 +46,7 @@ class ContactForm(forms.Form):
 class BlogCreateForm(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ('title', 'content', 'description', 'img')
+        fields = ('title', 'content', 'description', 'img', 'published_at')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

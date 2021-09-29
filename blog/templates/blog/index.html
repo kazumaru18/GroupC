@@ -21,15 +21,14 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
+            <h1>投稿一覧</h1>
+            {% if user.is_authenticated %}
             <div class="clearfix">
                 <a class="btn btn-primary float-right" href="{% url 'blog:blog_create' %}">新規作成</a>
             </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <h1>投稿一覧</h1>
+            {% endif %}
             <ul>
             {% for blog in object_list %}
-            {% if user.is_authenticated or blog.is_public %}
             <div class="post-preview">
                 <a href="{% url 'blog:blog_detail' blog.id %}">
                     <h2 class="post-title">
@@ -37,19 +36,16 @@
                         {% endif %}
                         {{ blog.title }}
                     </h2>
-                    <h3 class="post-subtitle">
-                        {{ blog.content|truncatechars:20 }}
-                    </h3>
+                    <p>{{ blog.description|truncatechars:20 }}</p>
                     <p class="post-meta">{{ blog.created_at }}</p>
                 </a>
                     {% if blog.img %}
                     <a href="{% url 'blog:blog_detail' blog.id %}">
-                        <img src="{{ blog.img.url }}" alt="{{ blog.title }}">
+                        <img src="{{ blog.img.url }}" alt="{{ blog.title }}" width="200" height="200">
                     </a>
                     {% endif %}
                 </div>
             <hr class="my-4" />
-            {% endif %}
             {% empty %}
             <div class="post-preview">
                 <li style="list-style: none;">まだ投稿はありません。</li>

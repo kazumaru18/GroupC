@@ -18,7 +18,7 @@ class IndexView(generic.ListView):
     model = Blog
     template_name = 'blog/index.html'
     paginate_by = 4
-    
+
 class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = Blog
     template_name = "blog_detail.html"

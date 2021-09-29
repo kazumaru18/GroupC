@@ -10,8 +10,8 @@ class Blog(models.Model):
     """"ブログモデル"""
     user = models.ForeignKey(CustomUser, verbose_name="ユーザー", on_delete=models.PROTECT)
     title = models.CharField(verbose_name="タイトル", max_length=50)
+    description = models.CharField(verbose_name="あらすじ" ,max_length=200)
     content = models.TextField(verbose_name="本文", blank=True, null=True)
-    description = models.TextField(verbose_name="説明" ,blank=True)
     img = models.ImageField(verbose_name="イメージ", blank=True, null=True)
     created_at = models.DateTimeField(verbose_name="作成日時", auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="更新日時", auto_now=True)
