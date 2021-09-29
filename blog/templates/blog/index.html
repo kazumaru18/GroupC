@@ -9,7 +9,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Public Blog</h1>
-                    <span class="subheading">個人で閲覧可能のブログサイト</span>
+                    <span class="subheading">自分専用のブログサイト</span>
                 </div>
             </div>
         </div>
@@ -21,27 +21,8 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            <!-- Post preview-->
-            <h3>one</h3>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <h3>two</h3>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <h3>three</h3>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post preview-->
-            <div class="post-preview">
-                <a href="post.html">
-                    <h2 class="post-title">Sample</h2>
-                    <h3 class="post-subtitle">Sample-sub</h3>
-                </a>
-                <p class="post-meta">
-                    Posted by Start Bootstrap on July 8, 2021
-                </p>
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">新規作成</a>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
@@ -49,24 +30,63 @@
             <ul>
             {% for blog in object_list %}
             {% if user.is_authenticated or blog.is_public %}
-                <li>
-                    {% if not blog.is_public %}[下書き] 
-                    {% endif %}
-                    <a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a>
-                    <br>
+            <div class="post-preview">
+                <a href="{% url 'blog:blog_detail' blog.id %}">
+                    <h2 class="post-title">
+                        {% if blog.is_public %}[下書き] 
+                        {% endif %}
+                        {{ blog.title }}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{ blog.content|truncatechars:20 }}
+                    </h3>
+                    <p class="post-meta">{{ blog.created_at }}</p>
+                </a>
                     {% if blog.img %}
                     <a href="{% url 'blog:blog_detail' blog.id%}">
                         <img src="{{ blog.img.url }}" alt="{{ blog.title }}">
                     </a>
                     {% endif %}
-                </li>
+                </div>
+            <hr class="my-4" />
             {% endif %}
             {% empty %}
-            <li>まだ投稿はありません。</li>
+            <div class="post-preview">
+                <li style="list-style: none;">まだ投稿はありません。</li>
+            </div>
             {% endfor %}
             </ul>
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+
+            <!-- ページネーション処理 -->
+            {% if is_paginated %}
+            <ul class="pagination">
+                <!-- 前ページへのリンク -->
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                <!-- ページ数表示 -->
+                {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_num %}
+                        <li class="page-item active"><a class="page-link" href="#">{{ page_num }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                <!-- 次ページへのリンク -->
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+
         </div>
     </div>
 </div>

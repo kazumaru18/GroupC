@@ -16,12 +16,69 @@
 </header>
 {% endblock %}
 {% block contents %}
-<h1>{{ object.title }}</h1>
-<p>{{ object.published_at|date }}</p>
+<div class="container">
+    <div class="my-div-style w-100">
+        <div class="row">
+            <div class="col-3">
+                <strong>タイトル</strong>
+            </div>
+            <div class="col-9">
+                {{ object.title }}
+                <p>{{ object.published_at|date }}</p>
+            </div>
+        </div>
+            <hr>
+
+        <div class=row>
+            <div class="col-3">
+                <strong>本文</strong>
+            </div>
+            <div class="col-9">
+                {{ object.content|linebreaksbr }}
+            </div>
+        </div>
+        <hr>
+
+        <div class=row>
+            <div class="col-3">
+                <strong>写真</strong>
+            </div>
+            <div class="col-3">
+                {% if object.img %}
+                    <img src="{{ object.img.url }}" width="200" height="200"/>
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+                
+        <div class=row>
+            <div class="col-3">
+                <strong>作成日時</strong>
+            </div>
+            <div class="col-9">
+                {{ object.created_at }}
+            </div>
+        </div>
+        <hr>
+
+        <div class=row>
+            <div class="col-3">
+                <strong>更新日時</strong>
+            </div>
+            <div class="col-9">
+                {{ object.updated_at }}
+            </div>
+        </div>
+        </div>
+        <a class="btn btn-success mt-5 mb-3" href="#">編集</a>
+        <a class="btn btn-danger mt-5 ml-2 mb-3" href="#">削除</a>
+    </div>
+</div>
 <img src="/media/post_content_images/nc72734.png" width="300" height="300" alt="Pipenv | Python">
-{% for tag in object.tags.all %}
-{{ tag.name }}
-{% endfor %}
 <hr>
 {{ object.content|safe }}
+<article class="comment-area">
+    <a class="btn btn-primary my-3" href="{% url 'blog:comment_form' post.pk %}">コメントを投稿する</a>
+    {% include "blog/snippets/comments.html" %}
+  </article>
 {% endblock %}
