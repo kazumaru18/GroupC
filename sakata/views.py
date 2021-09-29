@@ -2,7 +2,7 @@ import logging
 # from django.http.response import Http404, HttpResponse
 from django.shortcuts import render
 from django.views import generic
-from .forms import ContactForm, SakataCreateForm
+from .forms import ContactForm, BlogCreateForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -10,13 +10,13 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 class IndexView(generic.TemplateView):
-    template_name = "sakata/index.html"
+    template_name = "index.html"
 
 class AboutView(generic.TemplateView):
-    template_name="sakata/about.html"
+    template_name="about.html"
 
 class ContactView(generic.FormView):
-    template_name = "sakata/contact.html"
+    template_name = "contact.html"
     form_class = ContactForm
     success_url = reverse_lazy('sakata:contact')
 
@@ -27,28 +27,28 @@ class ContactView(generic.FormView):
         return super().form_valid(form)
 
 class PostView(generic.TemplateView):
-    template_name="sakata/contact.html"
+    template_name="contact.html"
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Sakata
-class SakataListView(LoginRequiredMixin, generic.ListView):
-    model = Sakata
+from .models import Blog
+class BlogListView(LoginRequiredMixin, generic.ListView):
+    model = Blog
     template_name = 'blog_list.html'
-    paginate_by = 2
+    paginate_by = 10
 
     def get_queryset(self):
-        diaries = Sakata.objects.filter(user=self.request.user).order_by('-created_at')
+        diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
         return diaries
 
-class SakataDetailView(LoginRequiredMixin, generic.DetailView):
-    model = Sakata
-    template_name = 'sakata_detail.html'
+class BlogDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Blog
+    template_name = 'blog_detail.html'
     pk_url_kwarg = 'id'
 
-class SakataCreateView(LoginRequiredMixin, generic.CreateView):
-    model = Sakata
-    template_name = 'sakata_create.html'
-    form_class = SakataCreateForm
+class BlogCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Blog
+    template_name = 'blog_create.html'
+    form_class = BlogCreateForm
     success_url = reverse_lazy('sakata:blog_list')
 
     def form_valid(self, form):
@@ -62,10 +62,10 @@ class SakataCreateView(LoginRequiredMixin, generic.CreateView):
         messages.error(self.request, "ブログの作成に失敗しました。")
         return super().form_invalid(form)
 
-class SakataUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Sakata
-    template_name = 'sakata_update.html'
-    form_class = SakataCreateForm
+class BlogUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Blog
+    template_name = 'blog_update.html'
+    form_class = BlogCreateForm
 
     def get_success_url(self):
         return reverse_lazy('sakata:blog_detail', kwargs={'pk': self.kwargs['pk']})
@@ -78,9 +78,9 @@ class SakataUpdateView(LoginRequiredMixin, generic.UpdateView):
         messages.error(self.request, "ブログの更新に失敗しました。")
         return super().form_invalid(form)
 
-class SakataDeleteView(LoginRequiredMixin, generic.DeleteView):
-    model = Sakata
-    template_name = 'sakata_delete.html'
+class BlogDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Blog
+    template_name = 'blog_delete.html'
     success_url = reverse_lazy('sakata:blog_list')
 
     def delete(self, request, *args, **kwargs):

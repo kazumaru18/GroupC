@@ -1,4 +1,4 @@
-from sakata.models import Sakata
+from .models import Blog
 from django import forms
 from django.core.mail import EmailMessage
 
@@ -34,9 +34,9 @@ class ContactForm(forms.Form):
         msg = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list)
         msg.send()
 
-class SakataCreateForm(forms.ModelForm):
+class BlogCreateForm(forms.ModelForm):
     class Meta:
-        model = Sakata
+        model = Blog
         fields = ('title', 'content', 'photo1', 'photo2', 'photo3',)
 
         def __init__(self, *args, **kwargs):
