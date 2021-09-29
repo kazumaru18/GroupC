@@ -11,17 +11,16 @@
                 <div class="clearfix">
                     <a class="btn btn-primary float-right" href="{% url 'sakata:blog_create' %}">新規作成</a>
                 </div>
-                {% for diary in diary_list %}
+                {% for blog in blog_list %}
                     <div class="post-preview">
-                        <a href="{% url 'sakata:blog_detail' sakata.pk %}">
-                            <h2 class="post-title">{{ sakata.title }}</h2>
-                            <h3 class="post-subtitle">{{ sakata.content|truncatechars:20 }}</h3>
+                        <a href="{% url 'sakata:blog_detail' blog.pk %}">
+                            <h2 class="post-title">{{ blog.title }}</h2>
+                            <h3 class="post-subtitle">{{ blog.content|truncatechars:20 }}</h3>
                         </a>
-                        <p class="post-meta">{{ sakata.created_at }}</p>
                     </div>
                     <hr>
                 {% empty %}
-                    <p>日記がありません。</p>
+                    <p>作成したブログがありません。</p>
                 {% endfor %}
 
                 <!-- ページネーション処理 -->

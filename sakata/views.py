@@ -26,9 +26,6 @@ class ContactView(generic.FormView):
         logger.info('Contact sent by {}'.format(form.cleaned_data['name']))
         return super().form_valid(form)
 
-class PostView(generic.TemplateView):
-    template_name="contact.html"
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Blog
 class BlogListView(LoginRequiredMixin, generic.ListView):
@@ -43,7 +40,6 @@ class BlogListView(LoginRequiredMixin, generic.ListView):
 class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = Blog
     template_name = 'blog_detail.html'
-    pk_url_kwarg = 'id'
 
 class BlogCreateView(LoginRequiredMixin, generic.CreateView):
     model = Blog
@@ -52,9 +48,9 @@ class BlogCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy('sakata:blog_list')
 
     def form_valid(self, form):
-        diary = form.save(commit=False)
-        diary.user = self.request.user
-        diary.save()
+        blog = form.save(commit=False)
+        blog.user = self.request.user
+        blog.save()
         messages.success(self.request, 'ブログを作成しました。')
         return super().form_valid(form)
 
