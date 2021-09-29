@@ -31,9 +31,9 @@ class BlogListView(LoginRequiredMixin, generic.ListView):
     template_name = 'blog_list.html'
     paginate_by = 4
 
-    # def get_queryset(self):
-    #     diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
-    #     return diaries
+    def get_queryset(self):
+        diaries = Blog.objects.filter(user=self.request.user).order_by('-created_at')
+        return diaries
 
 class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = Blog
