@@ -29,8 +29,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:index' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:about' %}">About</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:post' %}">Sample Post</a></li>
+
+                        <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:post' %}">Sample Post</a></li> -->
+                        <li class="nav-item {% block active_blog_list %}{% endblock %}"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:blog_list' %}">Blog List</a></li>
+                        
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'sato:inquiry' %}">Inquiry</a></li>
                         {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'account_logout' %}">Log Out</a></li>
@@ -43,9 +45,17 @@
             </div>
         </nav>
         <!-- Page Header-->
-        {% block header %}
-        {% endblock %}
-
+        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
         {% if messages %}
         <div class="container">
             <div class="row">

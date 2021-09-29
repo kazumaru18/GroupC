@@ -10,8 +10,6 @@ class IndexView(generic.ListView):
     template_name = 'index.html'
     paginate_by = 3
 
-class AboutView(generic.TemplateView):
-    template_name = 'about.html'
 
 class PostView(generic.TemplateView):
     template_name = 'post.html'
