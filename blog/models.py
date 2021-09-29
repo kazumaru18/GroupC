@@ -19,7 +19,7 @@ class Blog(models.Model):
     is_public = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name_plural = "Blog"
+        verbose_name_plural = ""
         ordering = ['-created_at']
         
     def save(self, *args, **kwargs):
@@ -31,7 +31,7 @@ class Blog(models.Model):
         return self.title
 
 class ContentImage(models.Model):
-    post = models.ForeignKey(Blog, on_delete=models.PROTECT)
+    post = models.ForeignKey(Blog, on_delete=models.CASCADE)
     content_image = models.ImageField(upload_to='post_content_images/')
 
 class Comment(models.Model):

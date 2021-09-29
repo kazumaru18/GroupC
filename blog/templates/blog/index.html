@@ -9,7 +9,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Public Blog</h1>
-                    <span class="subheading">自分専用のブログサイト</span>
+                    <span class="subheading">自分専用のブログサイト。無料ログインで閲覧可能です</span>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <div class="clearfix">
-                <a class="btn btn-primary float-right" href="#">新規作成</a>
+                <a class="btn btn-primary float-right" href="{% url 'blog:blog_create' %}">新規作成</a>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
@@ -43,7 +43,7 @@
                     <p class="post-meta">{{ blog.created_at }}</p>
                 </a>
                     {% if blog.img %}
-                    <a href="{% url 'blog:blog_detail' blog.id%}">
+                    <a href="{% url 'blog:blog_detail' blog.id %}">
                         <img src="{{ blog.img.url }}" alt="{{ blog.title }}">
                     </a>
                     {% endif %}

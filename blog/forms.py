@@ -2,7 +2,7 @@ from django import forms
 from django.forms import fields
 from django.core.mail import EmailMessage
 from django.forms import ModelForm, TextInput, Textarea
-from blog.models import Comment, Reply
+from blog.models import Blog, Comment, Reply
 
 class ContactForm(forms.Form):
     name = forms.CharField(label='お名前', max_length=30)
@@ -43,6 +43,17 @@ class ContactForm(forms.Form):
         message = EmailMessage(subject=subject, body=message, from_email=from_email, to=to_list, cc=cc_list,)
         message.send()
 
+class BlogCreateForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ('title', 'content', 'description', 'img')
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+#以下コメント欄
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
@@ -78,6 +89,6 @@ class ReplyForm(ModelForm):
             }),
         }
         labels = {
-            'author': '',
-            'text': '',
+            'author': ' ',
+            'text': ' '
         }
